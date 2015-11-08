@@ -239,7 +239,7 @@ appServices.factory('FMAService', function ($http) {
     params.page = page || 1;
     params.limit = per_page || FMA.per_page;
 
-    var url = 'http://' + FMA.host + '/api/get/' + domain + '.json';
+    var url = 'https://' + FMA.host + '/api/get/' + domain + '.json';
     return $http.get(url, {params: params});
   };
 
