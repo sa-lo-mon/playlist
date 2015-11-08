@@ -200,7 +200,16 @@ appServices.service('AuthService', function ($rootScope, $state, $q, $http, USER
     getUserModel: getUserModel,
     setUserModel: setUserModel,
     addTrack: addTrack,
-    removeTrack: removeTrack
+    removeTrack: removeTrack,
+    isAuthenticated: function () {
+      return isAuthenticated;
+    },
+    userName: function () {
+      return userName;
+    },
+    role: function () {
+      return role;
+    }
   };
 });
 
@@ -257,6 +266,7 @@ appServices.factory('FMAService', function ($http) {
   return FMA;
 });
 
-appServices.config(function ($httpProvider) {
+appServices.config(function ($httpProvider, $sceProvider) {
   $httpProvider.interceptors.push('AuthInterceptor');
+  $sceProvider.enabled(false);
 });
