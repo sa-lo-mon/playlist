@@ -1,0 +1,19 @@
+<ion-view view-title="Malls">
+    <ion-content>
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right"
+                      ng-repeat="mall in malls"
+                      type="item-text-wrap"
+                      href="#/tab/malls/{{mall.Id}}">
+                <img ng-src="{{mall.face}}">
+                <h2>{{mall.name}}</h2>
+                <p>{{mall.lastText}}</p>
+                <i>{{mall.distance}} km</i>
+
+                <!--        <ion-option-button class="button-assertive" ng-click="remove(mall)">
+                          Delete
+                        </ion-option-button>-->
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

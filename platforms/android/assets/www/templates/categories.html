@@ -1,0 +1,18 @@
+<ion-view view-title="Categories">
+    <ion-content class="padding">
+        <form ng-submit="sub()">
+            <div class="list">
+                <ion-toggle
+                        ng-repeat="item in categories"
+                        ng-checked="item.checked"
+                        ng-model="item.checked"
+                        class="item item-text-wrap" ng-change="check(item.Id, item.checked)">
+                    {{item.Name}}
+                </ion-toggle>
+                <label class="item item-input">
+                    <button class="button button-block button-positive" type="submit">Submit</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

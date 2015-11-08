@@ -1,0 +1,17 @@
+<ion-view view-title="All Sales">
+    <ion-content>
+        <ion-list>
+            <ion-item type="item-text-wrap"
+                      class="item-remove-animate item-avatar item-icon-right"
+                      ng-repeat="sale in sales"
+                      href="#/tab/sales/{{sale.id}}">
+                <img ng-src="{{sale.face}}">
+                <h2>{{sale.name}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+
+                <ion-option-button class="button-assertive" ng-click="add(sale)">Add
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

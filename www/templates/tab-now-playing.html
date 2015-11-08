@@ -1,0 +1,17 @@
+<ion-view view-title="Now Playing">
+  <ion-content class="padding">
+
+    <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+      <img ng-src="{{currentTrack.track_image_file}}"/>
+
+      <h2>{{currentTrack.track_title}}</h2>
+
+      <h3>by {{currentTrack.artist_name}}</h3>
+
+      <h2>Album:
+        <a ng-href="{{currentTrack.album_url}}"> {{currentTrack.album_title}} </a>
+      </h2>
+      <audio id="audio_player" controls autoplay ng-src="{{currentTrack.track_url}}"></audio>
+    </ion-item>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,40 @@
+<ion-view cache-view="false" view-title="Registration">
+    <ion-content class="padding">
+        <form ng-submit="sub()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Email:</span>
+                    <input type="text" ng-model="formData.email" placeholder="Enter email"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password: </span>
+                    <input type="password" ng-model="formData.password" placeholder="Enter password"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">First Name:</span>
+                    <input type="text" ng-model="formData.firstname" placeholder="Enter first name"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Last Name:</span>
+                    <input type="text" ng-model="formData.lastname" placeholder="Enter last name"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Birth Year:</span>
+                    <input type="text" ng-model="formData.birthyear" placeholder="Enter birth year"/>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">City:</span>
+                    <input type="text" ng-model="formData.city" placeholder="Enter city"/>
+                </label>
+                <label class="item item-divider">
+                    <span class="input-label">Gender:</span>
+                    <ion-radio ng-model="formData.gender" value="male">Male</ion-radio>
+                    <ion-radio ng-model="formData.gender" value="female">Female</ion-radio>
+                </label>
+                <label class="item item-input">
+                    <button class="button button-block button-positive" type="submit">Submit</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
