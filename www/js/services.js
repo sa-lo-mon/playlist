@@ -237,7 +237,7 @@ appServices.factory('FMAService', function ($http) {
 
   function addDownload(track) {
     var url = track.track_url += '/download';
-    url = url.replace('http', 'https');
+    url = url.replace('http://', 'https://');
     track.track_url = url;
 
     return track;
