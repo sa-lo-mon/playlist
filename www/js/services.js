@@ -167,7 +167,7 @@ appServices.service('AuthService', function ($rootScope, $state, $q, $http, USER
   var addTrack = function (trackId) {
 
     var playlist = localStorage[LOCAL_PLAYLIST_KEY];
-    if (playlist == null || playlist == '') {
+    if (playlist == null || playlist == '' || playlist == 'undefined') {
       playlist = [];
     } else {
       playlist = JSON.parse(playlist);
@@ -227,43 +227,25 @@ appServices.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
 
 appServices.factory('FMAService', function ($http) {
 
-  var root = this;
-  var FMA = root.FMA = {
-    host: 'freemusicarchive.org',
-    api_key: 'P9BKQ2V2DPKOCB7D',
-    per_page: 20
+  function getTracks() {
+    return $http.get('/api/getTracks');
+  }
+
+  function getTrackById(trackId) {
+    return $http.get('/api/getTrack/' + trackId);
+  }
+
+  function addDownload(track) {
+    track.track_url += '/download';
+    return track;
   };
 
-  function requestData(domain, params, callback, page, per_page) {
-    params.api_key = FMA.api_key;
-    params.page = page || 1;
-    params.limit = per_page || FMA.per_page;
+  return {
+    getTracks: getTracks,
+    getTrackById: getTrackById,
+    addDownload: addDownload
+  }
 
-    var url = 'https://' + FMA.host + '/api/get/' + domain + '.json';
-    return $http.get(url, {params: params});
-  };
-
-  FMA.getCurators = function getCurators(params, callbackFunc, page, per_page) {
-    return requestData('curators', params, callbackFunc, page, per_page);
-  };
-
-  FMA.getGenres = function getGenres(params, callbackFunc, page, per_page) {
-    return requestData('genres', params, callbackFunc, page, per_page);
-  };
-
-  FMA.getArtists = function getArtists(params, callbackFunc, page, per_page) {
-    return requestData('artists', params, callbackFunc, page, per_page);
-  };
-
-  FMA.getAlbums = function getAlbums(params, callbackFunc, page, per_page) {
-    return requestData('albums', params, callbackFunc, page, per_page);
-  };
-
-  FMA.getTracks = function getTracks(params, callbackFunc, page, per_page) {
-    return requestData('tracks', params, callbackFunc, page, per_page);
-  };
-
-  return FMA;
 });
 
 appServices.config(function ($httpProvider, $sceProvider) {

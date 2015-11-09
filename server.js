@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var mongoAccessLayer = require('./www/js/mongoAccessLayer.js');
+var fma = require('./www/js/fmaAccessLayer.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -63,6 +64,24 @@ app.post('/api/register/complete', function (req, res) {
         }
       });
     }
+  });
+});
+
+app.get('/api/getTracks', function (req, res) {
+
+  fma.getTracks({}, function (data) {
+    res.json(data);
+  });
+});
+
+app.get('/api/getTrack/:track_id', function (req, res) {
+  var params = {};
+  if (req.params) {
+    params = req.params;
+  }
+
+  fma.getTracks(params, function (data) {
+    res.json(data);
   });
 });
 

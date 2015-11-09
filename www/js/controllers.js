@@ -59,7 +59,7 @@ appControllers.controller('RegisterCtrl', function ($scope, $http, $state, $ioni
         console.log(err);
 
         $ionicPopup.alert({
-          title: 'Registration Error!',
+          title: 'Registration Faild!',
           template: 'Please try register later.'
         });
       });
@@ -68,20 +68,31 @@ appControllers.controller('RegisterCtrl', function ($scope, $http, $state, $ioni
 
 appControllers.controller('NowPlayingCtrl', function ($scope, $rootScope) {
 
-
 });
 
-appControllers.controller('SelectedSongsCtrl', function ($scope, FMAService, AuthService) {
+appControllers.controller('SelectedSongsCtrl', function ($scope, $rootScope, $state, FMAService, AuthService) {
   var userModel = AuthService.getUserModel();
 
   $scope.songs = [];
 
   //get all thte details of each selected song
-  userModel.playlist.forEach(function (item) {
-    FMAService.getTracks({track_id: item}).success(function (data) {
-      $scope.songs.push(data.dataset[0]);
+  userModel.playlist.forEach(function (trackId) {
+    FMAService.getTrackById(trackId).success(function (data) {
+      var track = data.dataset[0];
+      FMAService.addDownload(track);
+      $scope.songs.push(track);
     });
   });
+
+  $scope.play = function (track) {
+
+    // save selected track in root scope
+    // so we can share data between views
+    $rootScope.currentTrack = track;
+
+    // redirect to 'now playing' tab
+    $state.go('tab.now-playing');
+  };
 
   $scope.remove = function (track) {
 
@@ -101,20 +112,18 @@ appControllers.controller('SongsCtrl', function ($scope, $rootScope, $state, FMA
 
       //modify 'track_url' field to include '/download' route
       // in order to download the media file form FMA
-      $scope.songs = addDownload(data.data.dataset);
+
+      var allTracks = data.data.dataset;
+      allTracks.forEach(function (track) {
+        FMAService.addDownload(track);
+      });
+
+      $scope.songs = allTracks;
+
     } else {
       console.log('error: ', err);
     }
   });
-
-  function addDownload(dataSet) {
-    var newDataSet = dataSet.map(function (track) {
-      track.track_url = track.track_url + '/download';
-      return track;
-    });
-
-    return newDataSet;
-  }
 
   $scope.add = function (track) {
     AuthService.addTrack(track.track_id);
@@ -130,4 +139,5 @@ appControllers.controller('SongsCtrl', function ($scope, $rootScope, $state, FMA
     $state.go('tab.now-playing');
   };
 
-});
+})
+;
