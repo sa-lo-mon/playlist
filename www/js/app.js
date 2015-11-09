@@ -50,6 +50,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 
     .state('tab.selected-songs', {
       url: '/selected-songs',
+      cache: false,
       views: {
         'tab-selected-songs': {
           templateUrl: 'templates/tab-selected-songs.html',

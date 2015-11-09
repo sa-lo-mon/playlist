@@ -50,7 +50,7 @@ app.post('/api/register/complete', function (req, res) {
     "gender": req.body.gender
   };
 
-  facebookToDB.checkUser(userDocument, function (err, data) {
+  mongoAccessLayer.checkUser(userDocument, function (err, data) {
     if (err) {
       res.send('check user - error!!');
     } else if (data) {

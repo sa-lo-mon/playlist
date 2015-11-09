@@ -49,7 +49,7 @@ appControllers.controller('RegisterCtrl', function ($scope, $http, $state, $ioni
 
   $scope.sub = function () {
 
-    $http.post('/register/complete', $scope.formData)
+    $http.post('/api/register/complete', $scope.formData)
       .success(function (data) {
 
         //redirect to 'login' page
